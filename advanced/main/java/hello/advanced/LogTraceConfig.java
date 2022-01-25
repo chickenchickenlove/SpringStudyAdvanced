@@ -6,17 +6,16 @@ import hello.advanced.trace.logtrace.ThreadLocalLogTrace;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
+
 @Configuration
 public class LogTraceConfig {
 
 
     @Bean
-    LogTrace logTrace() {
-
-
+    public LogTrace logTrace() {
         return new ThreadLocalLogTrace();
 //        return new FieldLogTrace();
     }
-
 
 }

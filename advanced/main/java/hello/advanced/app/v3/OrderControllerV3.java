@@ -1,30 +1,29 @@
 package hello.advanced.app.v3;
 
+
 import hello.advanced.app.v2.OrderServiceV2;
 import hello.advanced.trace.TraceStatus;
 import hello.advanced.trace.hellotrace.HelloTraceV2;
 import hello.advanced.trace.logtrace.LogTrace;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Slf4j
 @RequiredArgsConstructor
 public class OrderControllerV3 {
 
-    private final OrderServiceV3 orderService;
     private final LogTrace trace;
+    private final OrderServiceV3 orderService;
 
-
+    // 파라메터를 전달할 필요가 이제 없다.
     @GetMapping("/v3/request")
     public String request(String itemId) {
 
         TraceStatus status = null;
 
         try {
-            status = trace.begin("orderController");
+            status = trace.begin("OrderController.request()");
             orderService.orderItem(itemId);
             trace.end(status);
             return "ok";
@@ -32,6 +31,9 @@ public class OrderControllerV3 {
             trace.exception(status,e);
             throw e;
         }
+
+
+
 
     }
 }

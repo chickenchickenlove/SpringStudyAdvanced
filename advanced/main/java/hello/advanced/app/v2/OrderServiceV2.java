@@ -13,19 +13,18 @@ public class OrderServiceV2 {
     private final HelloTraceV2 trace;
     private final OrderRepositoryV2 orderRepository;
 
+    // item을 주문해라.
     public void orderItem(TraceId traceId, String itemId) {
-
         TraceStatus status = null;
-
         try {
-            status = trace.begin_sync(traceId,"OrderService");
-            orderRepository.save(status.getTraceId() ,itemId);
+            status = trace.beginSync(traceId,"OrderController.orderItem()");
+            orderRepository.save(status.getTraceId(), itemId);
             trace.end(status);
+
         } catch (Exception e) {
-            trace.exception(status, e);
+            trace.excpetion(status,e);
             throw e;
         }
-
     }
 
 

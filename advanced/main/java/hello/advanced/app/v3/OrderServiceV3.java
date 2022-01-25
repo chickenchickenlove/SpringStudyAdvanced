@@ -15,19 +15,18 @@ public class OrderServiceV3 {
     private final LogTrace trace;
     private final OrderRepositoryV3 orderRepository;
 
+    // item을 주문해라.
     public void orderItem(String itemId) {
-
         TraceStatus status = null;
-
         try {
-            status = trace.begin("OrderService");
-            orderRepository.save(status.getTraceId() ,itemId);
+            status = trace.begin("OrderController.orderItem()");
+            orderRepository.save(itemId);
             trace.end(status);
+
         } catch (Exception e) {
-            trace.exception(status, e);
+            trace.exception(status,e);
             throw e;
         }
-
     }
 
 
