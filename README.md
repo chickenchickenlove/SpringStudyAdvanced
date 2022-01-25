@@ -30,3 +30,4 @@
 - (코드) 로그 추적기 V2 개발 및 적용 (파라미터로 동기화)
 - (코드) FieldLogTrace 개발(필드 동기화 개발) → 동시성 문제 발견
 - (코드) ThreadLocalLogTrace 개발 → 동시성 문제 해결 
+- (정리) 로그 추적기 V1,V2, FieldLogTrace, ThreadLocalLogTrace 개발 관련 내용 정리 (https://ojt90902.tistory.com/696)
