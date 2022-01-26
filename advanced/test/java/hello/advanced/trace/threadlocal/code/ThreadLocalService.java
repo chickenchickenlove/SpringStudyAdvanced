@@ -2,31 +2,29 @@ package hello.advanced.trace.threadlocal.code;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j // 롬복 쓴다.
+@Slf4j
 public class ThreadLocalService {
 
-    // 이것만 String --> ThreadLocal로 바꾼다.
+
     private ThreadLocal<String> nameStore = new ThreadLocal<>();
 
+    public void logic(String name) {
 
-    public String logic(String name) {
-        log.info("저장 name = {} -> namesStore = {}", name, nameStore.get());
+        log.info("저장 name = {} -> nameStore = {}", name, nameStore.get());
         nameStore.set(name);
+
         sleep(1000);
-        log.info("조회 nameStore = {}", nameStore.get());
-        return nameStore.get();
+
+        log.info("조회 nameStore = {}",nameStore.get());
+
     }
 
     private void sleep(int millis) {
-
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
-
 
 }

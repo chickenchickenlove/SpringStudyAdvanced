@@ -5,30 +5,32 @@ import hello.advanced.trace.TraceStatus;
 import hello.advanced.trace.logtrace.LogTrace;
 import hello.advanced.trace.template.AbstractTemplate;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class OrderRepositoryV4 {
 
-
     private final LogTrace trace;
+
 
     public void save(String itemId) {
 
-        AbstractTemplate<Void> template = new AbstractTemplate<Void>(trace) {
-            @Override
-            protected Void call() {
 
+        AbstractTemplate<Object> template = new AbstractTemplate<>(trace) {
+            @Override
+            protected Object call() {
                 if (itemId.equals("ex")) {
-                    throw new IllegalStateException("예외 발생! ");
+                    throw new IllegalStateException("예외 발생");
                 }
                 sleep(1000);
                 return null;
             }
         };
 
-        template.execute("OrderController.save()");
+        template.execute("orderRepository");
 
     }
 
@@ -39,5 +41,4 @@ public class OrderRepositoryV4 {
             e.printStackTrace();
         }
     }
-
 }

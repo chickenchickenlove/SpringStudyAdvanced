@@ -1,7 +1,7 @@
 package hello.advanced.app.v5;
 
 import hello.advanced.app.v4.OrderRepositoryV4;
-import hello.advanced.trace.callback.TraceCallback;
+import hello.advanced.trace.callback.TraceCallBack;
 import hello.advanced.trace.callback.TraceTemplate;
 import hello.advanced.trace.logtrace.LogTrace;
 import hello.advanced.trace.template.AbstractTemplate;
@@ -12,21 +12,19 @@ import org.springframework.stereotype.Service;
 public class OrderServiceV5 {
 
     private final OrderRepositoryV5 orderRepository;
-    private final TraceTemplate traceTemplate;
+    private final TraceTemplate<Void> traceTemplate;
+
 
     public OrderServiceV5(LogTrace trace, OrderRepositoryV5 orderRepository) {
         this.orderRepository = orderRepository;
-        this.traceTemplate = new TraceTemplate(trace);
+        this.traceTemplate = new TraceTemplate<>(trace);
     }
 
-    // item을 주문해라.
     public void orderItem(String itemId) {
-
-        traceTemplate.execute("OrderController.orderItem()", (TraceCallback<Void>) () -> {
+        traceTemplate.execute("orderService", (TraceCallBack<Void>) () -> {
             orderRepository.save(itemId);
             return null;
         });
     }
-
 
 }

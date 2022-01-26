@@ -7,6 +7,6 @@ public class SubClassLogic1 extends AbstractTemplate{
 
     @Override
     protected void call() {
-        log.info("비즈니스 로직1 실행 ");
+        log.info("비즈니스 로직1 실행!");
     }
 }
