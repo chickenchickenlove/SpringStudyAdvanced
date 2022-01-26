@@ -47,3 +47,4 @@
 - (코드) Template-CallBack 패턴 테스트 코드 작성
 - (코드) Template-CallBack 패턴을 적용한 LogTrace 기능 구현 
 - (정리) 템플릿 메서드 패턴, 전략 패턴, 템플릿 콜백 패턴의 이해 및 정리(https://ojt90902.tistory.com/698)
+- (코드) 프록시 패턴 테스트 코드로 이해, 데코레이터 패턴 테스트 코드로 이해
