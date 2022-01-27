@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class ConcreteProxyTest {
 
-
     @Test
     void noProxy() {
         ConcreteLogic concreteLogic = new ConcreteLogic();
@@ -16,16 +15,13 @@ public class ConcreteProxyTest {
     }
 
 
-    @Test
-    void addProxy() {
 
+    @Test
+    void concreteProxyTest() {
         ConcreteLogic concreteLogic = new ConcreteLogic();
         TimeProxy timeProxy = new TimeProxy(concreteLogic);
         ConcreteClient concreteClient = new ConcreteClient(timeProxy);
         concreteClient.execute();
-
-
-
     }
 
 

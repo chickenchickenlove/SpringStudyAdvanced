@@ -1,6 +1,5 @@
 package hello.proxy.config.v1_proxy;
 
-
 import hello.proxy.app.v1.*;
 import hello.proxy.app.v2.OrderControllerV2;
 import hello.proxy.app.v2.OrderRepositoryV2;
@@ -22,18 +21,19 @@ public class ConcreteProxyConfig {
     @Bean
     public OrderControllerV2 orderControllerV2(LogTrace logTrace) {
         OrderControllerV2 orderControllerV2 = new OrderControllerV2(orderServiceV2(logTrace));
-        OrderControllerConcreteProxy proxy = new OrderControllerConcreteProxy(orderControllerV2,logTrace);
+        OrderControllerConcreteProxy proxy = new OrderControllerConcreteProxy(logTrace, orderControllerV2);
         return proxy;
     }
-
 
 
     @Bean
     public OrderServiceV2 orderServiceV2(LogTrace logTrace) {
         OrderServiceV2 orderServiceV2 = new OrderServiceV2(orderRepositoryV2(logTrace));
-        OrderServiceV2 proxy = new OrderServiceConcreteProxy(orderServiceV2, logTrace);
+        OrderServiceConcreteProxy proxy = new OrderServiceConcreteProxy(orderServiceV2, logTrace);
         return proxy;
     }
+
+
 
     @Bean
     public OrderRepositoryV2 orderRepositoryV2(LogTrace logTrace) {
@@ -42,7 +42,6 @@ public class ConcreteProxyConfig {
         OrderRepositoryConcreteProxy proxy = new OrderRepositoryConcreteProxy(orderRepositoryV2, logTrace);
         return proxy;
     }
-
 
 
 }

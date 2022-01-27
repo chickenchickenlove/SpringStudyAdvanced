@@ -3,29 +3,26 @@ package hello.proxy.pureproxy.concreteproxy.code;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class TimeProxy extends ConcreteLogic {
+public class TimeProxy extends ConcreteLogic{
 
-    private final ConcreteLogic concreteLogic;
+    private final ConcreteLogic target;
 
-    public TimeProxy(ConcreteLogic concreteLogic) {
-        this.concreteLogic = concreteLogic;
+    public TimeProxy(ConcreteLogic target) {
+        this.target = target;
     }
 
     @Override
     public String operation() {
+        long s = System.currentTimeMillis();
 
-        log.info("프록시 객체 소환 ");
+        String result = target.operation();
 
-        long startTimeMs = System.currentTimeMillis();
-
-        String result = concreteLogic.operation();
-
-
-        long endTimeMs = System.currentTimeMillis();
-        long resultTime = endTimeMs - startTimeMs;
-
-        log.info("프록시 객체 끝, resultTime = {}", resultTime);
+        long e = System.currentTimeMillis();
+        long r = e - s;
+        log.info("실행 시간 = {}", r);
 
         return result;
+
     }
 }
+

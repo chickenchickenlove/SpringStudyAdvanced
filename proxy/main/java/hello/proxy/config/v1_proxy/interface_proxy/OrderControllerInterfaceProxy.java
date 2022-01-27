@@ -1,6 +1,7 @@
 package hello.proxy.config.v1_proxy.interface_proxy;
 
 import hello.proxy.app.v1.OrderControllerV1;
+import hello.proxy.app.v1.OrderControllerV1Impl;
 import hello.proxy.trace.TraceStatus;
 import hello.proxy.trace.logtrace.LogTrace;
 import lombok.extern.slf4j.Slf4j;
@@ -8,23 +9,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OrderControllerInterfaceProxy implements OrderControllerV1 {
 
-    private final OrderControllerV1 target;
+
+    private final OrderControllerV1Impl target;
     private final LogTrace logTrace;
 
 
-    public OrderControllerInterfaceProxy(OrderControllerV1 target, LogTrace logTrace) {
+    public OrderControllerInterfaceProxy(OrderControllerV1Impl target, LogTrace logTrace) {
         this.target = target;
         this.logTrace = logTrace;
     }
 
     @Override
     public String request(String itemId) {
-        log.info("프록시1가 적용이 되어있습니다. ");
+        log.info("인터페이스 프록시로 구현했음.");
+
         TraceStatus status = null;
 
         try {
-            status = logTrace.begin("orderController.request()");
-            String request = target.request(itemId);
+            status = logTrace.begin("OrderService.Request()");
+            target.request(itemId);
             logTrace.end(status);
             return "ok";
         } catch (Exception e) {

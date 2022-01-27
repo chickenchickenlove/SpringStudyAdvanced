@@ -6,7 +6,6 @@ import hello.proxy.trace.logtrace.LogTrace;
 
 public class OrderRepositoryInterfaceProxy implements OrderRepositoryV1 {
 
-
     private final OrderRepositoryV1 target;
     private final LogTrace logTrace;
 
@@ -17,20 +16,17 @@ public class OrderRepositoryInterfaceProxy implements OrderRepositoryV1 {
 
     @Override
     public void save(String itemId) {
-
         TraceStatus status = null;
 
         try {
-            status = logTrace.begin("orderRepositoryV1.save()");
+            status = logTrace.begin("OrderRepository.save()");
             target.save(itemId);
             logTrace.end(status);
+            return;
         } catch (Exception e) {
             logTrace.exception(status, e);
             throw e;
         }
 
-
-
     }
-
 }

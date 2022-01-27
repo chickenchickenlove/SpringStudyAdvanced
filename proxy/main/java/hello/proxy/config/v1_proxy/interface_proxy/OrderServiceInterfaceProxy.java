@@ -1,19 +1,21 @@
 package hello.proxy.config.v1_proxy.interface_proxy;
 
 import hello.proxy.app.v1.OrderServiceV1;
-import hello.proxy.app.v2.OrderServiceV2;
 import hello.proxy.trace.TraceStatus;
 import hello.proxy.trace.logtrace.LogTrace;
 
 public class OrderServiceInterfaceProxy implements OrderServiceV1 {
 
-    private final LogTrace logTrace;
-    private final OrderServiceV1 target;
 
-    public OrderServiceInterfaceProxy(LogTrace logTrace, OrderServiceV1 target) {
-        this.logTrace = logTrace;
+    private final OrderServiceV1 target;
+    private final LogTrace logTrace;
+
+
+    public OrderServiceInterfaceProxy(OrderServiceV1 target, LogTrace logTrace) {
         this.target = target;
+        this.logTrace = logTrace;
     }
+
 
     @Override
     public void orderItem(String itemId) {
@@ -24,11 +26,10 @@ public class OrderServiceInterfaceProxy implements OrderServiceV1 {
             status = logTrace.begin("OrderService.orderItem()");
             target.orderItem(itemId);
             logTrace.end(status);
+            return;
         } catch (Exception e) {
             logTrace.exception(status, e);
             throw e;
         }
-
-
     }
 }

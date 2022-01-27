@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TimeDecorator implements Component{
 
-    private Component target;
+
+    private final Component target;
 
     public TimeDecorator(Component target) {
         this.target = target;
@@ -13,16 +14,15 @@ public class TimeDecorator implements Component{
 
     @Override
     public String operation() {
-        log.info("Time Decorator 시작 ");
-        long startTimeMs = System.currentTimeMillis();
+        log.info("TimeDecorator 실행");
+        long s = System.currentTimeMillis();
 
         String result = target.operation();
 
-        long endTimeMs = System.currentTimeMillis();
-        long resultTime = endTimeMs - startTimeMs;
+        long e = System.currentTimeMillis();
+        long r = e - s;
 
-        log.info("Time Decorator 종료, Result Time = {}", resultTime);
-
+        log.info("TimeDecorator 완료, 소요 시간 = {}", r);
         return result;
     }
 }

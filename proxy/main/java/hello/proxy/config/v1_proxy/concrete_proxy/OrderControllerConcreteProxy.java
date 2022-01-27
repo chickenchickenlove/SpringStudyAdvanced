@@ -10,24 +10,25 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderControllerConcreteProxy extends OrderControllerV2 {
 
 
-    private final OrderControllerV2 target;
     private final LogTrace logTrace;
+    private final OrderControllerV2 target;
 
-    public OrderControllerConcreteProxy(OrderControllerV2 target, LogTrace logTrace) {
+
+    public OrderControllerConcreteProxy(LogTrace logTrace, OrderControllerV2 target) {
         super(null);
-        this.target = target;
         this.logTrace = logTrace;
+        this.target = target;
     }
-
 
     @Override
     public String request(String itemId) {
-        log.info("프록시2가 적용이 되어있습니다. ");
+        log.info("구현체 프록시로 구현했음.");
+
         TraceStatus status = null;
 
         try {
-            status = logTrace.begin("orderController.request()");
-            String request = target.request(itemId);
+            status = logTrace.begin("OrderService.Request()");
+            target.request(itemId);
             logTrace.end(status);
             return "ok";
         } catch (Exception e) {

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ConcreteLogic {
 
     public String operation() {
-        log.info("Concrete Logic 실행");
+        log.info("실제 객체 실행");
         return "data";
     }
 
