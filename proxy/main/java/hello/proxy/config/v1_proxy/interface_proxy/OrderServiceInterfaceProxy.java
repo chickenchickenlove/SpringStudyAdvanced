@@ -6,10 +6,8 @@ import hello.proxy.trace.logtrace.LogTrace;
 
 public class OrderServiceInterfaceProxy implements OrderServiceV1 {
 
-
     private final OrderServiceV1 target;
     private final LogTrace logTrace;
-
 
     public OrderServiceInterfaceProxy(OrderServiceV1 target, LogTrace logTrace) {
         this.target = target;
@@ -21,14 +19,12 @@ public class OrderServiceInterfaceProxy implements OrderServiceV1 {
     public void orderItem(String itemId) {
 
         TraceStatus status = null;
-
         try {
-            status = logTrace.begin("OrderService.orderItem()");
+            status = logTrace.begin("OrderServiceV1.OrderItem()");
             target.orderItem(itemId);
             logTrace.end(status);
-            return;
         } catch (Exception e) {
-            logTrace.exception(status, e);
+            logTrace.exception(status,e);
             throw e;
         }
     }

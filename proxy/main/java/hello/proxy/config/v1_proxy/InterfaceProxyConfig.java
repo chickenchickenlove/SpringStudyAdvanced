@@ -14,16 +14,18 @@ public class InterfaceProxyConfig {
 
     @Bean
     public OrderControllerV1 orderControllerV1(LogTrace logTrace) {
-        OrderControllerV1Impl orderControllerV1 = new OrderControllerV1Impl(orderServiceV1(logTrace));
-        OrderControllerInterfaceProxy proxy = new OrderControllerInterfaceProxy(orderControllerV1, logTrace);
+
+        OrderControllerV1 target = new OrderControllerV1Impl(orderServiceV1(logTrace));
+        OrderControllerInterfaceProxy proxy = new OrderControllerInterfaceProxy(target, logTrace);
         return proxy;
     }
 
 
+
     @Bean
     public OrderServiceV1 orderServiceV1(LogTrace logTrace) {
-        OrderServiceV1 orderServiceV1 = new OrderServiceV1Impl(orderRepositoryV1(logTrace));
-        OrderServiceInterfaceProxy proxy = new OrderServiceInterfaceProxy(orderServiceV1, logTrace);
+        OrderServiceV1 target = new OrderServiceV1Impl(orderRepositoryV1(logTrace));
+        OrderServiceInterfaceProxy proxy = new OrderServiceInterfaceProxy(target,logTrace);
         return proxy;
     }
 
@@ -31,9 +33,9 @@ public class InterfaceProxyConfig {
 
     @Bean
     public OrderRepositoryV1 orderRepositoryV1(LogTrace logTrace) {
-
-        OrderRepositoryV1 orderRepositoryV1 = new OrderRepositoryV1Impl();
-        OrderRepositoryInterfaceProxy proxy = new OrderRepositoryInterfaceProxy(orderRepositoryV1, logTrace);
+        OrderRepositoryV1 target = new OrderRepositoryV1Impl();
+        OrderRepositoryInterfaceProxy proxy = new OrderRepositoryInterfaceProxy(target, logTrace);
         return proxy;
     }
+
 }

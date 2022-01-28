@@ -9,10 +9,10 @@ import java.lang.reflect.Method;
 
 public class LogTraceFilterHandler implements InvocationHandler {
 
+
     private final Object target;
     private final LogTrace logTrace;
     private final String[] patterns;
-
 
     public LogTraceFilterHandler(Object target, LogTrace logTrace, String[] patterns) {
         this.target = target;
@@ -20,30 +20,31 @@ public class LogTraceFilterHandler implements InvocationHandler {
         this.patterns = patterns;
     }
 
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        TraceStatus status = null;
 
-
-        if (!PatternMatchUtils.simpleMatch(patterns, method.getName())) {
-            return method.invoke(target, args);
+        // 매칭되지 않으면 걍 넘기자.
+        String name = method.getName();
+        if (!PatternMatchUtils.simpleMatch(patterns, name)) {
+            Object result = method.invoke(target, args);
+            return result;
         }
 
 
-
+        TraceStatus status = null;
         try {
-
-            String message = method.getDeclaringClass().getSimpleName() + "." + method.getName() + "()";
+            // 메세지 작성.
+            String message = method.getDeclaringClass().getSimpleName() + "." +
+                    method.getName() + "()";
             status = logTrace.begin(message);
-
             Object result = method.invoke(target, args);
-
             logTrace.end(status);
             return result;
-
         } catch (Exception e) {
-            logTrace.exception(status, e);
+            logTrace.exception(status,e);
             throw e;
         }
+
     }
 }

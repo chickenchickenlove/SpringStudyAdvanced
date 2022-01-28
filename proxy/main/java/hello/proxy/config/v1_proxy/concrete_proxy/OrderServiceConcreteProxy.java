@@ -18,17 +18,16 @@ public class OrderServiceConcreteProxy extends OrderServiceV2 {
 
     @Override
     public void orderItem(String itemId) {
-
         TraceStatus status = null;
-
         try {
-            status = logTrace.begin("OrderService.orderItem()");
+            status = logTrace.begin("OrderServiceV2.OrderItem()");
             target.orderItem(itemId);
             logTrace.end(status);
-            return;
         } catch (Exception e) {
-            logTrace.exception(status, e);
+            logTrace.exception(status,e);
             throw e;
         }
+
     }
 }
+

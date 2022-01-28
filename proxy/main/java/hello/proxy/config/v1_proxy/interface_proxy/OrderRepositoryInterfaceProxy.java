@@ -7,7 +7,7 @@ import hello.proxy.trace.logtrace.LogTrace;
 public class OrderRepositoryInterfaceProxy implements OrderRepositoryV1 {
 
     private final OrderRepositoryV1 target;
-    private final LogTrace logTrace;
+    private LogTrace logTrace;
 
     public OrderRepositoryInterfaceProxy(OrderRepositoryV1 target, LogTrace logTrace) {
         this.target = target;
@@ -16,15 +16,14 @@ public class OrderRepositoryInterfaceProxy implements OrderRepositoryV1 {
 
     @Override
     public void save(String itemId) {
-        TraceStatus status = null;
 
+        TraceStatus status = null;
         try {
-            status = logTrace.begin("OrderRepository.save()");
+            status = logTrace.begin("OrderRepositoryV1.save()");
             target.save(itemId);
             logTrace.end(status);
-            return;
         } catch (Exception e) {
-            logTrace.exception(status, e);
+            logTrace.exception(status,e);
             throw e;
         }
 

@@ -1,19 +1,15 @@
 package hello.proxy.config.v2_proxy;
 
 import hello.proxy.app.v1.*;
-import hello.proxy.app.v2.OrderControllerV2;
 import hello.proxy.config.v2_proxy.handler.LogTraceBasicHandler;
 import hello.proxy.trace.logtrace.LogTrace;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Proxy;
 
 @Configuration
-@Slf4j
 public class DynamicProxyBasicConfig {
-
 
 
     @Bean
@@ -21,12 +17,12 @@ public class DynamicProxyBasicConfig {
 
         OrderControllerV1 target = new OrderControllerV1Impl(orderServiceV1(logTrace));
         LogTraceBasicHandler handler = new LogTraceBasicHandler(target, logTrace);
-
         OrderControllerV1 proxy = (OrderControllerV1) Proxy.newProxyInstance(OrderControllerV1.class.getClassLoader(),
-                new Class[]{OrderControllerV1.class},
-                handler);
+                new Class[]{OrderControllerV1.class}, handler);
+
         return proxy;
     }
+
 
 
 
@@ -35,9 +31,9 @@ public class DynamicProxyBasicConfig {
 
         OrderServiceV1 target = new OrderServiceV1Impl(orderRepositoryV1(logTrace));
         LogTraceBasicHandler handler = new LogTraceBasicHandler(target, logTrace);
+
         OrderServiceV1 proxy = (OrderServiceV1) Proxy.newProxyInstance(OrderServiceV1.class.getClassLoader(),
-                new Class[]{OrderServiceV1.class},
-                handler);
+                new Class[]{OrderServiceV1.class}, handler);
         return proxy;
     }
 
@@ -45,6 +41,7 @@ public class DynamicProxyBasicConfig {
     @Bean
     public OrderRepositoryV1 orderRepositoryV1(LogTrace logTrace) {
 
+        // 진짜 타겟 만든다.
         OrderRepositoryV1 target = new OrderRepositoryV1Impl();
         LogTraceBasicHandler handler = new LogTraceBasicHandler(target, logTrace);
         OrderRepositoryV1 proxy = (OrderRepositoryV1) Proxy.newProxyInstance(OrderRepositoryV1.class.getClassLoader(),
@@ -52,5 +49,7 @@ public class DynamicProxyBasicConfig {
                 handler);
         return proxy;
     }
+
+
 
 }

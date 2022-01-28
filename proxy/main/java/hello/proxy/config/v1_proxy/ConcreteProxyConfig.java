@@ -20,16 +20,18 @@ public class ConcreteProxyConfig {
 
     @Bean
     public OrderControllerV2 orderControllerV2(LogTrace logTrace) {
-        OrderControllerV2 orderControllerV2 = new OrderControllerV2(orderServiceV2(logTrace));
-        OrderControllerConcreteProxy proxy = new OrderControllerConcreteProxy(logTrace, orderControllerV2);
+
+        OrderControllerV2 target = new OrderControllerV2(orderServiceV2(logTrace));
+        OrderControllerConcreteProxy proxy = new OrderControllerConcreteProxy(target, logTrace);
         return proxy;
     }
 
 
+
     @Bean
     public OrderServiceV2 orderServiceV2(LogTrace logTrace) {
-        OrderServiceV2 orderServiceV2 = new OrderServiceV2(orderRepositoryV2(logTrace));
-        OrderServiceConcreteProxy proxy = new OrderServiceConcreteProxy(orderServiceV2, logTrace);
+        OrderServiceV2 target = new OrderServiceV2(orderRepositoryV2(logTrace));
+        OrderServiceConcreteProxy proxy = new OrderServiceConcreteProxy(target,logTrace);
         return proxy;
     }
 
@@ -37,11 +39,13 @@ public class ConcreteProxyConfig {
 
     @Bean
     public OrderRepositoryV2 orderRepositoryV2(LogTrace logTrace) {
-
-        OrderRepositoryV2 orderRepositoryV2 = new OrderRepositoryV2();
-        OrderRepositoryConcreteProxy proxy = new OrderRepositoryConcreteProxy(orderRepositoryV2, logTrace);
+        OrderRepositoryV2 target = new OrderRepositoryV2();
+        OrderRepositoryConcreteProxy proxy = new OrderRepositoryConcreteProxy(target, logTrace);
         return proxy;
     }
+
+
+
 
 
 }
