@@ -74,4 +74,5 @@
 - (코드) ProxyFactory를 이용한 횡단 관심사 로그 추적기 적용
 - (코드) AnnotationAwareAutoProxyCreator를 이용한 횡단 관심사 로그 추적기 적용
 - (코드) @Aspect + @Around를 이용한 횡단 관심사 로그 추적기 적용.
-- (정ㄹ) 프록시 패턴 / 데코레이터 패턴 / 프록시를 적용한 횡단 관심사 해결(https://ojt90902.tistory.com/698)
+- (정리) 프록시 패턴 / 데코레이터 패턴 / 프록시를 적용한 횡단 관심사 해결(https://ojt90902.tistory.com/699)
+- (정리) JDK 동적 프록시, CGLIB를 이용한 동적 프록시 구현 및 로그 추적기에 적용(https://ojt90902.tistory.com/700)
