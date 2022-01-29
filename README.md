@@ -82,4 +82,5 @@
 - (강의) 스프링 AOP(시작, 포인트컷 분리, 어드바이스 추가, 포인트컷 참조, 어드바이스 순서, 어드바이스 종류)
 - (코드) ProxyFactory를 이용한 횡단 관심사 처리 / BeanPostProcessor를 이용한 Component Scan 대상에 횡단 관심사 처리
 - (코드) AnnotationAwareAutoProxyCreator를 이용한 횡단 관심사 처리, @Aspect Annotation Advisor를 이용한 횡단 관심사 처리
-- (정리) 프록시 팩토를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/701)
+- (정리) 프록시 팩토리를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/701)
+- (정리) 빈 후처리기(Bean PostProcessor)를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/702)
