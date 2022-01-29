@@ -84,3 +84,7 @@
 - (코드) AnnotationAwareAutoProxyCreator를 이용한 횡단 관심사 처리, @Aspect Annotation Advisor를 이용한 횡단 관심사 처리
 - (정리) 프록시 팩토리를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/701)
 - (정리) 빈 후처리기(Bean PostProcessor)를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/702)
+
+
+# 22.01.30
+- (정리) 스프링이 제공하는 빈 후처리기 AnnotationAwareAspectJAutoProxyCreator를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/703)
