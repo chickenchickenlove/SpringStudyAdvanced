@@ -11,6 +11,7 @@ public class LogTraceAdvice implements MethodInterceptor {
 
     private final LogTrace logTrace;
 
+
     public LogTraceAdvice(LogTrace logTrace) {
         this.logTrace = logTrace;
     }
@@ -20,19 +21,20 @@ public class LogTraceAdvice implements MethodInterceptor {
 
         TraceStatus status = null;
         try {
-            // 메세지 작성.
+
             Method method = invocation.getMethod();
-            String message = method.getDeclaringClass().getSimpleName() + "." +
-                    method.getName() + "()";
+            String message = method.getDeclaringClass().getSimpleName() + "." + method.getName() + "()";
             status = logTrace.begin(message);
 
-            Object result = invocation.proceed();
 
+            // 핵심 기능
+            Object result = invocation.proceed();
 
             logTrace.end(status);
             return result;
+
         } catch (Exception e) {
-            logTrace.exception(status,e);
+            logTrace.exception(status, e);
             throw e;
         }
 

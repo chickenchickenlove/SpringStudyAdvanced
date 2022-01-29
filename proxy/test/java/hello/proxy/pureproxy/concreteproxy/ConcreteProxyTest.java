@@ -8,20 +8,18 @@ import org.junit.jupiter.api.Test;
 public class ConcreteProxyTest {
 
     @Test
-    void noProxy() {
+    void noProxyTest() {
         ConcreteLogic concreteLogic = new ConcreteLogic();
-        ConcreteClient concreteClient = new ConcreteClient(concreteLogic);
-        concreteClient.execute();
+        ConcreteClient client = new ConcreteClient(concreteLogic);
+        client.execute();
     }
 
-
-
     @Test
-    void concreteProxyTest() {
+    void ProxyTest() {
         ConcreteLogic concreteLogic = new ConcreteLogic();
         TimeProxy timeProxy = new TimeProxy(concreteLogic);
-        ConcreteClient concreteClient = new ConcreteClient(timeProxy);
-        concreteClient.execute();
+        ConcreteClient client = new ConcreteClient(timeProxy);
+        client.execute();
     }
 
 

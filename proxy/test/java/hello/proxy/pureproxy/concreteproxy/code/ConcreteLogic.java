@@ -4,11 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ConcreteLogic {
-
-    public String operation() {
-        log.info("실제 객체 실행");
-        return "data";
+    public void call() {
+        log.info("콘크리트 로직 실행");
     }
-
 
 }

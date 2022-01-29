@@ -12,17 +12,12 @@ public class TimeProxy extends ConcreteLogic{
     }
 
     @Override
-    public String operation() {
-        long s = System.currentTimeMillis();
+    public void call() {
+        long startTime = System.currentTimeMillis();
+        target.call();
 
-        String result = target.operation();
-
-        long e = System.currentTimeMillis();
-        long r = e - s;
-        log.info("실행 시간 = {}", r);
-
-        return result;
-
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+        log.info("실행 완료, resultTime = {}",resultTime);
     }
 }
-

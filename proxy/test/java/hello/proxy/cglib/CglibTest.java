@@ -6,31 +6,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.cglib.proxy.Enhancer;
 
-
 @Slf4j
 public class CglibTest {
 
-
     @Test
-    void cglib() {
+    void cglibTest() {
 
-        ConcreteService concreteService = new ConcreteService();
+        // 타겟 생성
+        ConcreteService target = new ConcreteService();
+
+        // 몸뚱아리 생성
+        TimeMethodInterceptor timeMethodInterceptor = new TimeMethodInterceptor(target);
 
         Enhancer enhancer = new Enhancer();
 
-
-        // CGLIB는 부모 클래스를 상속받아서 만든다.
         enhancer.setSuperclass(ConcreteService.class);
 
-        enhancer.setCallback(new TimeMethodInterceptor(concreteService));
-
+        enhancer.setCallback(timeMethodInterceptor);
 
         ConcreteService proxy = (ConcreteService)enhancer.create();
-
-        log.info("targetClass = {}",concreteService.getClass());
-        log.info("proxyClass = {}",proxy.getClass());
-
         proxy.call();
+
+        log.info("target = {}", target.getClass());
+        log.info("proxy = {}", proxy.getClass());
+
+
+
 
 
     }

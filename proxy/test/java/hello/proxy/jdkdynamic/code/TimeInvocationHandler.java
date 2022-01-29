@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 public class TimeInvocationHandler implements InvocationHandler {
 
     private final Object target;
-
     public TimeInvocationHandler(Object target) {
         this.target = target;
     }
@@ -17,13 +16,14 @@ public class TimeInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.info("TimeProxy 실행");
-        long s = System.currentTimeMillis();
-
+        long startTime = System.currentTimeMillis();
         Object result = method.invoke(target, args);
 
-        long e = System.currentTimeMillis();
-        long r = e - s;
-        log.info("TimeProxy 종료 resultTime = {}", r);
+
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+
+        log.info("TimeProxy 종료, resultTime = {}", resultTime);
         return result;
     }
 }

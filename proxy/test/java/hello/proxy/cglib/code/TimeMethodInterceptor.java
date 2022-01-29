@@ -11,23 +11,24 @@ public class TimeMethodInterceptor implements MethodInterceptor {
 
     private final Object target;
 
-
     public TimeMethodInterceptor(Object target) {
         this.target = target;
     }
 
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
-        log.info("TimeProxy 실행");
-        long s = System.currentTimeMillis();
+        log.info("프록시 객체 실행");
 
+        long startTime = System.currentTimeMillis();
 
         Object result = methodProxy.invoke(target, args);
 
-        long e = System.currentTimeMillis();
-        long r = e - s;
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
 
-        log.info("TimeProxy 종료, resultTime = {}",r);
+        log.info("프록시 객체 종료, resultTime = {}",resultTime);
         return result;
+
+
     }
 }
