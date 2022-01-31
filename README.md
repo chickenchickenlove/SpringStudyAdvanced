@@ -88,3 +88,8 @@
 
 # 22.01.30
 - (정리) 스프링이 제공하는 빈 후처리기 AnnotationAwareAspectJAutoProxyCreator를 이용한 횡단 관심사 처리(https://ojt90902.tistory.com/703)
+
+
+# 22.01.31
+- (강의) 스프링 AOP 포인트컷 지시자 사용법(execution,within,args,@target,@within,@annotation,@args, bean, 매개변수 전달) 
+- (강의) 스프링 AOP 포인트컷 지시자 관련. this / target 포인트컷 지시자의 프록시 생성에서의 차이.
