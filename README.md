@@ -99,3 +99,8 @@
 
 # 22.02.02
 - (정리) @Aspect를 이용한 AOP 프록시 적용 및 코드 리팩토리 관련 정리(https://ojt90902.tistory.com/704)
+
+
+# 22.02.04
+- (코드) Pointcut 지시자를 이용한 테스트 코드 작성(exeuction, within, target, args, @annotation, @within, @target, this, target)
+- (정리) Pointcut 지시자 용법 정리(https://ojt90902.tistory.com/707)
