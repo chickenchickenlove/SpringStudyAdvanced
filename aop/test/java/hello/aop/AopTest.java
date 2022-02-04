@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
-//@Import({AspectV5Order.TxAspect.class, AspectV5Order.LogAspect.class})
+
+//@Import({AspectV5Order.LogAspect.class,AspectV5Order.TxAspect.class})
+@Import(AspectV6.class)
 @Slf4j
 @SpringBootTest
 public class AopTest {
