@@ -9,51 +9,39 @@ import org.aspectj.lang.annotation.*;
 @Slf4j
 public class AspectV6 {
 
-    @Around("hello.aop.order.aop.Pointcuts.allOrderAndService()")
-    public Object doTransaction(ProceedingJoinPoint joinPoint) throws Throwable {
-        try {
-            //Before
-            log.info("[트랜잭션 시작] {}",joinPoint.getSignature());
-            Object result = joinPoint.proceed();
 
-            //AfterReturning
+    // 트랜잭션 구현
 
-            log.info("[트랜잭션 커밋] {}",joinPoint.getSignature());
-            return result;
-        } catch (Exception e) {
-            // AfterThrowing
-
-            log.info("[트랜잭션 롤백] {}", joinPoint.getSignature());
-            throw e;
-        }finally {
-            // After
-
-            log.info("[트랜잭션 릴리즈] {}", joinPoint.getSignature());
-        }
+    @Around("hello.aop.order.aop.MyPointcut.allOrder()")
+    public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable {
+        log.info("[log] {}", joinPoint.getSignature().toShortString());
+        return joinPoint.proceed();
     }
 
 
-    @Before("hello.aop.order.aop.Pointcuts.allOrderAndService()")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
-        log.info("[트랜잭션 시작] {}", joinPoint.getSignature());
+    @Before("hello.aop.order.aop.MyPointcut.allService()")
+    public void beforeTx(JoinPoint joinPoint) throws Throwable {
+        log.info("[트랜잭션 시작] {}", joinPoint.getSignature().toShortString());
     }
 
-    @AfterReturning(value = "hello.aop.order.aop.Pointcuts.allOrderAndService()", returning = "result")
-    public void doAfterReturning(JoinPoint joinPoint, Object result) throws Throwable {
-        log.info("[트랜잭션 커밋] {}", joinPoint.getSignature());
-    }
-
-
-    @AfterThrowing(value = "hello.aop.order.aop.Pointcuts.allOrderAndService()", throwing = "ex")
-    public void doAfterThrowing(JoinPoint joinPoint, Exception ex) throws Throwable {
-        log.info("[트랜잭션 롤백] {}", joinPoint.getSignature());
-    }
-
-    @After("hello.aop.order.aop.Pointcuts.allOrderAndService()")
-    public void doAfter(JoinPoint joinPoint) throws Throwable {
-        log.info("[리소스 릴리즈] {}", joinPoint.getSignature());
+    @AfterReturning(value = "hello.aop.order.aop.MyPointcut.allOrderAndService()", returning = "result")
+    public void afterReturnTx(JoinPoint joinPoint, Object result) throws Throwable {
+        log.info("[After Returning] result : {}", result);
+        log.info("[트랜잭션 종료] {}", joinPoint.getSignature().toShortString());
     }
 
 
+
+    @AfterThrowing(value = "hello.aop.order.aop.MyPointcut.allOrderAndService()", throwing = "ex")
+    public void afterThrowingTx(JoinPoint joinPoint, Exception ex) throws Throwable {
+        log.info("[After Throw] Catch : {}", ex.getMessage());
+        log.info("[트랜잭션 롤백] {}", joinPoint.getSignature().toShortString());
+    }
+
+
+    @After("hello.aop.order.aop.MyPointcut.allService()")
+    public void doTx(JoinPoint joinPoint) throws Throwable {
+        log.info("[리소스 릴리즈] {}", joinPoint.getSignature().toShortString());
+    }
 
 }
