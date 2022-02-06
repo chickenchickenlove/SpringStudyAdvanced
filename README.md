@@ -104,3 +104,7 @@
 # 22.02.04
 - (코드) Pointcut 지시자를 이용한 테스트 코드 작성(exeuction, within, target, args, @annotation, @within, @target, this, target)
 - (정리) Pointcut 지시자 용법 정리(https://ojt90902.tistory.com/707)
+
+
+# 22.02.06
+- (정리, 코드) @Aspect를 실제 프로젝트에 적용하기 (로그 추적기, 재시도하기) (https://ojt90902.tistory.com/718)
